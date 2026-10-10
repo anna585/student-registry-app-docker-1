@@ -6,10 +6,21 @@ pipeline{
                 bat "npm install"
             }
         }
-        stage("Run tests"){
-            steps{
-                bat "npm test"
+        stage("Test and Audit"){
+            parallel{
+                stage("Run unit tests"){
+                    steps{
+                        bat "npm test"
+                    }
+                }
+                stage("Run integration tests"){
+                    steps{
+                        echo "Running integration tests"
+                    }
+                }
+
             }
+          
         }
     }
 }
